@@ -3,17 +3,16 @@ import { Client, Clients } from '../types/client';
 
 const updateClient = (
   clientId: string,
-  updatedFields: Partial<Omit<Client, 'id'>>, // Les champs modifiables excluent l'ID
+  updatedFields: Partial<Omit<Client, 'id'>>, 
   setClients: React.Dispatch<React.SetStateAction<Clients>>
 ) => {
   const base = connectAirtable();
   const TABLE_NAME = "Projets";
   const table = base(TABLE_NAME);
 
-  // Préparation des champs mis à jour
   const updatedClient = {
     fields: {
-      ...updatedFields,
+      ...updatedFields,  // On applique les champs mis à jour
     },
   };
 
@@ -21,22 +20,22 @@ const updateClient = (
   table.update(
     [
       {
-        id: clientId, // L'identifiant du client à mettre à jour
-        fields: updatedClient.fields, // Champs mis à jour
+        id: clientId, 
+        fields: updatedClient.fields,
       },
     ],
     (error, records) => {
       if (error) {
-        console.error(error);
+        console.error("Erreur de mise à jour :", error);
         return;
       }
 
       if (!records || records.length === 0) {
-        console.error("No records updated");
+        console.error("Aucun enregistrement mis à jour");
         return;
       }
 
-      // Mise à jour de l'état local
+      // Mise à jour de l'état local après la mise à jour réussie
       setClients((previousClients) =>
         previousClients.map((client) =>
           client.id === clientId
