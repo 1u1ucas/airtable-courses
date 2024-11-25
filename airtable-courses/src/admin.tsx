@@ -10,38 +10,32 @@ function Admin() {
   const [editingClientId, setEditingClientId] = useState<string | null>(null);
   const [tempClient, setTempClient] = useState<Partial<Client>>({});
 
-  // Charger les clients au premier rendu
   useEffect(() => {
     getClients(setClients);
   }, []);
 
-  // Fonction pour démarrer l'édition d'un client
-  const handleEditClick = (client: Client) => {
-    setEditingClientId(client.id);
+  const handleEditClick = (id: string, client: Client) => {
+    setEditingClientId(id);
     setTempClient({ ...client });
   };
 
-  // Gérer les modifications des champs
   const handleInputChange = (field: keyof Client, value: string) => {
     setTempClient((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Gérer les modifications du statut (chip)
   const handleChipChange = (newStatus: Status) => {
     setTempClient((prev) => ({ ...prev, status: newStatus }));
   };
 
-  // Sauvegarder les modifications du client
   const handleConfirmClick = async () => {
     if (editingClientId && tempClient) {
-      // Effectuer la mise à jour dans Airtable
-      await updateClient(editingClientId, tempClient as ClientDto, setClients);
-      setEditingClientId(null); // Quitter le mode édition
-      setTempClient({}); // Réinitialiser l'état du client
+
+      await updateClient(editingClientId, tempClient as { firstName?: string; lastName?: string; email?: string; phoneNumber: string; notes?: string; status: Status; } , setClients);
+      setEditingClientId(null); 
+      setTempClient({}); 
     }
   };
 
-  // Supprimer un client
   const handleDeleteClick = async (id: string) => {
     if (confirm("Êtes-vous sûr de vouloir supprimer ce client ?")) {
       await deleteClient(id, setClients);
@@ -120,7 +114,7 @@ function Admin() {
                   <div className="flex items-center space-x-4">
                     <Chip status={client.status} editable={false} />
                     <button
-                      onClick={() => handleEditClick(client)}
+                      onClick={() => handleEditClick(client.id, client)}
                       className="px-4 py-2 bg-blue-600 text-white rounded"
                     >
                       Modifier

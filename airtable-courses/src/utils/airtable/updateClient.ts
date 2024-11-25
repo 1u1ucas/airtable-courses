@@ -1,9 +1,9 @@
 import connectAirtable from './connect';
-import { Client, Clients } from '../types/client';
+import { Client, Clients, Status } from '../types/client';
 
 const updateClient = (
   clientId: string,
-  updatedFields: Partial<Omit<Client, 'id'>>, 
+  updatedFields:  { firstName?: string; lastName?: string; email?: string; phoneNumber: string; notes?: string; status: Status; }, 
   setClients: React.Dispatch<React.SetStateAction<Clients>>
 ) => {
   const base = connectAirtable();
@@ -12,11 +12,10 @@ const updateClient = (
 
   const updatedClient = {
     fields: {
-      ...updatedFields,  // On applique les champs mis à jour
+      ...updatedFields,
     },
   };
 
-  // Mise à jour dans Airtable
   table.update(
     [
       {
@@ -35,11 +34,10 @@ const updateClient = (
         return;
       }
 
-      // Mise à jour de l'état local après la mise à jour réussie
       setClients((previousClients) =>
         previousClients.map((client) =>
           client.id === clientId
-            ? { ...client, ...updatedFields } // Fusion des anciens et nouveaux champs
+            ? { ...client, ...updatedFields }
             : client
         )
       );
