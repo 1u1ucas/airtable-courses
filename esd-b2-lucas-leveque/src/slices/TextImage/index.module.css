@@ -1,12 +1,28 @@
-.textImage {
+.main{
     display: flex;
-    flex-direction: row;
     gap: 20px;
     max-width: 1200px;
+    margin: auto;
+}
+
+.default {
+    flex-direction: row;
     background-color: red;
 }
 
-.textImage img {
+.imageText {
+    flex-direction: row-reverse;
+    background-color: blue;
+}
+
+.main img {
     width: 100%;
     height: auto;
+}
+
+.overline {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #f00;
 }

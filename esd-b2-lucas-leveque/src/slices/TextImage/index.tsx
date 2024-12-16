@@ -17,8 +17,14 @@ const TextImage = ({ slice }: TextImageProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className={style.container}
+      className={style.main + " " + style[slice.variation]}
     >
+      <div>
+        {/*Overline */}
+        {slice.variation === "default" && (
+          <p className={"overline"}>{slice.primary.overline}</p>
+        )}
+      </div>
       <div>
         {/* Text */}
         <PrismicRichText field={text} />

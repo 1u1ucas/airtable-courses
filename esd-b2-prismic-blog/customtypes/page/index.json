@@ -22,21 +22,11 @@
           "single": "heading1"
         }
       },
-      "description": {
-        "type": "Text",
-        "config": {
-          "label": "Description",
-          "placeholder": "add a description"
-        }
-      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "text_image": {
-              "type": "SharedSlice"
-            },
             "rich_text": {
               "type": "SharedSlice"
             }
@@ -68,17 +58,6 @@
             "height": 1260
           },
           "thumbnails": []
-        }
-      },
-      "slices1": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "text_image": {
-              "type": "SharedSlice"
-            }
-          }
         }
       }
     }

@@ -1,7 +1,7 @@
 {
-  "id": "page",
-  "label": "Page",
   "format": "page",
+  "id": "articles",
+  "label": "Articles",
   "repeatable": true,
   "status": true,
   "json": {
@@ -9,77 +9,56 @@
       "uid": {
         "type": "UID",
         "config": {
-          "label": "UID",
-          "placeholder": ""
+          "label": "UID"
         }
       },
       "title": {
-        "type": "StructuredText",
+        "type": "Text",
         "config": {
           "label": "Title",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "single": "heading1"
+          "placeholder": ""
         }
       },
       "description": {
         "type": "Text",
         "config": {
           "label": "Description",
-          "placeholder": "add a description"
+          "placeholder": ""
         }
       },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {
-            "text_image": {
-              "type": "SharedSlice"
-            },
-            "rich_text": {
-              "type": "SharedSlice"
-            }
-          }
+          "choices": {}
         }
       }
     },
     "SEO & Metadata": {
       "meta_title": {
-        "type": "Text",
         "config": {
           "label": "Meta Title",
           "placeholder": "A title of the page used for social media and search engines"
-        }
+        },
+        "type": "Text"
       },
       "meta_description": {
-        "type": "Text",
         "config": {
           "label": "Meta Description",
           "placeholder": "A brief summary of the page"
-        }
+        },
+        "type": "Text"
       },
       "meta_image": {
-        "type": "Image",
         "config": {
-          "label": "Meta Image",
           "constraint": {
-            "width": 2400,
-            "height": 1260
+            "height": 1260,
+            "width": 2400
           },
+          "label": "Meta Image",
           "thumbnails": []
-        }
-      },
-      "slices1": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "text_image": {
-              "type": "SharedSlice"
-            }
-          }
-        }
+        },
+        "type": "Image"
       }
     }
   }
